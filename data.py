@@ -12,7 +12,7 @@ df_time = pd.read_csv("pickup_times.csv")
 data_loc = df_loc.values
 data_time = df_time.values
 
-#returns town based oparser
+#returns town based on parse phrase
 def get_town(lat, long):
     geolocator = Nominatim(user_agent="latickup")
     location = geolocator.reverse(str(long) + ","+ str(lat))
@@ -47,6 +47,7 @@ def parse_date(data):
 def parse_time(data):
     time = parser.parse(data[1])
     return time.time()
+
 #filter data with given date        
 def filter_data_with_date(data,date):
     n = len(data)
@@ -64,4 +65,17 @@ def filter_data_with_time(data,start,end):
         if start <= parse_time(data[i]).strftime('%X') and end >= parse_time(data[i]).strftime('%X'):
             return_data.append(data[i])
     return np.array(return_data)
-print(len(filter_data_with_time(filter_data_with_date(get_store_pickuptime(sort_by_city("Helsinki",data_loc),data_time),"2019-01-13"),"19","20")))
+
+def median(data,storeID):
+    n = len(data)
+    dict = {"storeID": [],"median": [] }
+    for i in range(n):
+        if data[i][0] in storeID:
+            if data[i][0] in dict.keys():
+
+            else:
+                dict.
+
+
+
+#print(len(filter_data_with_time(filter_data_with_date(get_store_pickuptime(sort_by_city("Helsinki",data_loc),data_time),"2019-01-13"),"19","20")))
